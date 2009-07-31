@@ -1,4 +1,10 @@
 
+"""
+compose Longest Common Subsequence and Shortest Edit Script.
+The algorithm implemented here is based on "An O(NP) Sequence Comparison Algorithm"                                   
+by described by Sun Wu, Udi Manber and Gene Myers 
+"""
+
 class onp(object):
     
     def __init__(self, a, b):
