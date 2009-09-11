@@ -1,4 +1,9 @@
 
+/**
+ * The algorithm implemented here is based on "An O(NP) Sequence Comparison Algorithm"
+ * by described by Sun Wu, Udi Manber and Gene Myers
+ */
+
 #include "onp.h"
 
 onp_diff_t *onp_alloc_diff (onp_sequence_t *a, onp_sequence_t *b) {
