@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 
 import sys
-sys.path.insert(0, '../')
+#sys.path.insert(0, '../')
 from onp import onp
 
 if __name__ == "__main__":

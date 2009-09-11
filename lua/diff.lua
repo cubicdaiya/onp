@@ -1,7 +1,7 @@
 
 -- checked with Lua5.1.4
 
-dofile("../onp.lua")
+dofile("onp.lua")
 
 if #arg < 2 then
    error("few argument")
