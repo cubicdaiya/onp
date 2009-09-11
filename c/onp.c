@@ -33,7 +33,7 @@ uint snake (onp_diff_t *diff, int k, int p, int pp, int offset) {
 
 void onp_compose (onp_diff_t *diff) {
   int  p      = -1;
-  int  delta   = diff->n - diff->m;
+  int  delta  = diff->n - diff->m;
   uint offset = diff->m + 1;
   uint size   = diff->m + diff->n + 3;
   int *fp     = (int *)malloc(sizeof(int) * size);
