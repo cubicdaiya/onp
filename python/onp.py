@@ -31,7 +31,7 @@ class onp(object):
         return y
         
     def compose(self):
-        offset = self.m
+        offset = self.m + 1
         delta  = self.n - self.m
         size   = self.m + self.n + 3
         fp = []
