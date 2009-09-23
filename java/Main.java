@@ -7,6 +7,6 @@ public class Main {
 		Integer b[] = {1,2,3,4,5,0,7,8,9,10};
 		Diff<Integer> diff = new Diff<Integer>(a, b);
 		diff.compose();
-		System.out.println(diff.getEditdis());
+		System.out.println("editdistance:" + diff.getEditdis());
 	}
 }
