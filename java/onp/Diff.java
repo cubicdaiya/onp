@@ -1,7 +1,10 @@
 package onp;
 import java.util.Arrays;
 
-
+/**
+ * The algorithm implemented here is based on "An O(NP) Sequence Comparison Algorithm"
+ * by described by Sun Wu, Udi Manber and Gene Myers
+ */
 public class Diff<T> {
 	
 	private T A[];
