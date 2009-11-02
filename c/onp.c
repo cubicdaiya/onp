@@ -6,6 +6,17 @@
 
 #include "onp.h"
 
+static uint snake (onp_diff_t *diff, int k, int p, int pp, int offset);
+static uint snake (onp_diff_t *diff, int k, int p, int pp, int offset) {
+  int y = onp_max(p, pp);
+  int x = y - k;
+  while (x < diff->m && y < diff->n && diff->a[x] == diff->b[y]) {
+    ++x;
+    ++y;
+  }
+  return y;
+}
+
 onp_diff_t *onp_alloc_diff (onp_sequence_t *a, onp_sequence_t *b) {
   onp_diff_t *diff = (onp_diff_t *)malloc(sizeof(onp_diff_t));
   diff->a = a;
@@ -24,16 +35,6 @@ void onp_free_diff (onp_diff_t *diff) {
   free(diff->path);
   free(diff);
   diff = NULL;
-}
-
-uint snake (onp_diff_t *diff, int k, int p, int pp, int offset) {
-  int y = onp_max(p, pp);
-  int x = y - k;
-  while (x < diff->m && y < diff->n && diff->a[x] == diff->b[y]) {
-    ++x;
-    ++y;
-  }
-  return y;
 }
 
 void onp_compose (onp_diff_t *diff) {

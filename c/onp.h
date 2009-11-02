@@ -22,7 +22,6 @@ typedef struct {
 
 onp_diff_t *onp_alloc_diff (onp_sequence_t *a, onp_sequence_t *b);
 void onp_free_diff (onp_diff_t *diff);
-uint snake (onp_diff_t *diff, int k, int p, int pp, int offset);
 void onp_compose (onp_diff_t *diff);
 
 #endif
