@@ -6,8 +6,8 @@
 
 #include "onp.h"
 
-static uint snake (onp_diff_t *diff, int k, int p, int pp, int offset);
-static uint snake (onp_diff_t *diff, int k, int p, int pp, int offset) {
+static uint snake (onp_diff_t *diff, int k, int p, int pp);
+static uint snake (onp_diff_t *diff, int k, int p, int pp) {
   int y = onp_max(p, pp);
   int x = y - k;
   while (x < diff->m && y < diff->n && diff->a[x] == diff->b[y]) {
@@ -50,13 +50,13 @@ void onp_compose (onp_diff_t *diff) {
   do {
     ++p;
     for (int k=-p;k<=delta-1;++k) {
-      fp[k+offset] = snake(diff, k, fp[k-1+offset]+1, fp[k+1+offset], offset);
+      fp[k+offset] = snake(diff, k, fp[k-1+offset]+1, fp[k+1+offset]);
     }
     for (int k=delta+p;k>=delta+1;--k) {
-      fp[k+offset] = snake(diff, k, fp[k-1+offset]+1, fp[k+1+offset], offset);
+      fp[k+offset] = snake(diff, k, fp[k-1+offset]+1, fp[k+1+offset]);
     }
     fp[delta+offset] = snake(diff, delta, fp[delta-1+offset]+1,
-                             fp[delta+1+offset], offset);
+                             fp[delta+1+offset]);
   } while (fp[delta+offset] != diff->n);
   diff->editdis = delta + 2 * p;
   free(fp);
