@@ -5,8 +5,10 @@
 
 package main
 
-import "os";
-import "fmt";
+import (
+    "os";
+    "fmt";
+)
 
 type diff_info struct {
   a string;
