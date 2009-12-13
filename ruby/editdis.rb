@@ -7,7 +7,7 @@ b = ARGV[1]
 
 diff = Onp.new(a, b);
 diff.compose()
-print "editdistance:" + diff.editdis.to_s() + "\n"
+print "editdistance:#{diff.editdis.to_s()}\n"
 
 
 
