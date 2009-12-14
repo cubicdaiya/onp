@@ -27,15 +27,11 @@ class Onp
     p      = -1
     begin
       p = p + 1
-      k = -p
-      while k <= delta - 1
+      (-p..delta-1).each do |k|
         fp[k+offset] = snake(k, fp[k-1+offset]+1, fp[k+1+offset])
-        k = k + 1
       end
-      k = delta + p
-      while k >= delta + 1
+      (delta+p..delta+1).to_a.reverse.each do |k|
         fp[k+offset] = snake(k, fp[k-1+offset]+1, fp[k+1+offset])
-        k = k - 1
       end
       fp[delta+offset] = snake(delta, fp[delta-1+offset]+1, fp[delta+1+offset])
     end while fp[delta+offset] != @n
