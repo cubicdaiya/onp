@@ -4,9 +4,6 @@
      by described by Sun Wu, Udi Manber and Gene Myers 
 --]]
 ONP = {}
-SES_DELETE = -1
-SES_COMMON = 0
-SES_ADD    = 1
 function ONP.new (a, b)
    local self = {
       A = a,
@@ -21,6 +18,9 @@ function ONP.new (a, b)
       lcs        = "",
       editdis    = 0,
       reverse    = false,
+      SES_DELETE = -1,
+      SES_COMMON = 0,
+      SES_ADD    = 1,
    }
    -- getter
    function self.geteditdistance () 
@@ -37,8 +37,8 @@ function ONP.new (a, b)
       local self = { x=x_, y=y_, k=k_ }
       return self
    end
-   function self.seselem.new (elem_, type_)
-      local self = { elem=elem_, type=type_}
+   function self.seselem.new (elem_, t_)
+      local self = { elem=elem_, t=t_}
       return self
    end
    function self.compose ()
@@ -75,31 +75,32 @@ function ONP.new (a, b)
       px_idx, py_idx = 0, 0
       for i=#epc, 1, -1 do
          while (px_idx < epc[i].x or py_idx < epc[i].y) do
+            t = nil
             if (epc[i].y - epc[i].x) > (py_idx - px_idx) then
                elem = string.sub(self.B, y_idx, y_idx)
                if self.reverse then 
-                  type = SES_DELETE
+                  t = self.SES_DELETE
                else
-                  type = SES_ADD
+                  t = self.SES_ADD
                end
-               self.ses[#self.ses+1] = self.seselem.new(elem, type)
+               self.ses[#self.ses+1] = self.seselem.new(elem, t)
                y_idx  = y_idx  + 1
                py_idx = py_idx + 1
             elseif epc[i].y - epc[i].x < py_idx - px_idx then
                elem = string.sub(self.A, x_idx, x_idx)
                if self.reverse then 
-                  type = SES_ADD
+                  t = self.SES_ADD
                else
-                  type = SES_DELETE
+                  t = self.SES_DELETE
                end
-               self.ses[#self.ses+1] = self.seselem.new(elem, type)
+               self.ses[#self.ses+1] = self.seselem.new(elem, t)
                x_idx  = x_idx  + 1
                px_idx = px_idx + 1
             else 
                elem = string.sub(self.A, x_idx, x_idx)
-               type = SES_COMMON
+               t = self.SES_COMMON
                self.lcs = self.lcs .. elem
-               self.ses[#self.ses+1] = self.seselem.new(elem, type)
+               self.ses[#self.ses+1] = self.seselem.new(elem, t)
                x_idx  = x_idx  + 1
                y_idx  = y_idx  + 1
                px_idx = px_idx + 1

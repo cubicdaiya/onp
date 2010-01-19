@@ -15,11 +15,11 @@ print("LCS:" .. d:getlcs())
 print("SES")
 ses = d:getses()
 for i=1, #ses do
-   if ses[i].type == SES_COMMON then
+   if ses[i].t == d.SES_COMMON then
       print("  " .. ses[i].elem)
-   elseif ses[i].type == SES_DELETE then
+   elseif ses[i].t == d.SES_DELETE then
       print("- " .. ses[i].elem)
-   elseif ses[i].type == SES_ADD then
+   elseif ses[i].t == d.SES_ADD then
       print("+ " .. ses[i].elem)
    end
 end
