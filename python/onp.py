@@ -1,10 +1,9 @@
 
-"""
-The algorithm implemented here is based on "An O(NP) Sequence Comparison Algorithm"                                   
-by described by Sun Wu, Udi Manber and Gene Myers 
-"""
-
 class onp(object):
+    """
+    The algorithm implemented here is based on "An O(NP) Sequence Comparison Algorithm"                                   
+    by described by Sun Wu, Udi Manber and Gene Myers 
+    """
     
     def __init__(self, a, b):
         self.a = a
@@ -13,11 +12,9 @@ class onp(object):
         self.n = len(b)
         path = []
         self.editdis = 0
-        reverse = False
         if self.m >= self.n:
             self.a, self.b = self.b, self.a
             self.m, self.n = self.n, self.m
-            self.reverse = True
 
     def getEditDistance(self):
         return self.editdis
@@ -34,9 +31,7 @@ class onp(object):
         offset = self.m + 1
         delta  = self.n - self.m
         size   = self.m + self.n + 3
-        fp = []
-        for i in range(size):
-            fp.append(-1)
+        fp = [ -1 for idx in range(size) ]
         p = -1
         while (True):
             p = p + 1
@@ -47,7 +42,6 @@ class onp(object):
                 fp[k+offset] = self.snake(k, fp[k-1+offset]+1, fp[k+1+offset])
 
             fp[delta+offset] = self.snake(delta, fp[delta-1+offset]+1, fp[delta+1+offset])
-            if fp[delta+offset] >= self.n:
-                break
+            if fp[delta+offset] >= self.n: break
         self.editdis = delta + 2 * p
 
