@@ -54,7 +54,7 @@ sub editdistance {
 }
 
 if ($#ARGV + 1 == 2) {
-  print "editdistance:", editdistance($ARGV[0], $ARGV[1]);
+  print "editdistance:", editdistance($ARGV[0], $ARGV[1]), "\n";
 } else {
-  print "few arguments"
+  print "few arguments\n"
 }
