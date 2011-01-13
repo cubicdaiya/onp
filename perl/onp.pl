@@ -37,19 +37,19 @@ sub editdistance {
   my $size   = $m + $n + 3;
   my @fp;
   for (my $i=0;$i<$size;++$i) {
-    @fp[$i] = -1;
+    $fp[$i] = -1;
   }
   my $p = -1;
   do {
     ++$p;
     for (my $k=-$p;$k<=$delta-1;++$k) {
-	  @fp[$k+$offset] = snake($a, $b, $m, $n, $k, @fp[$k-1+$offset]+1, @fp[$k+1+$offset]);
-     }
+      $fp[$k+$offset] = snake($a, $b, $m, $n, $k, $fp[$k-1+$offset]+1, $fp[$k+1+$offset]);
+    }
     for (my $k=$delta+$p;$k>=$delta+1;--$k) {
-	  @fp[$k+$offset] = snake($a, $b, $m, $n, $k, @fp[$k-1+$offset]+1, @fp[$k+1+$offset]);
-     }
-    @fp[$delta+$offset] = snake($a, $b, $m, $n, $delta, @fp[$delta-1+$offset]+1, @fp[$delta+1+$offset]);
-  } while (@fp[$delta + $offset] != $n);
+      $fp[$k+$offset] = snake($a, $b, $m, $n, $k, $fp[$k-1+$offset]+1, $fp[$k+1+$offset]);
+    }
+    $fp[$delta+$offset] = snake($a, $b, $m, $n, $delta, $fp[$delta-1+$offset]+1, $fp[$delta+1+$offset]);
+  } while ($fp[$delta + $offset] != $n);
   return $delta + 2 * $p;
 }
 
