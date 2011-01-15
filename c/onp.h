@@ -1,4 +1,3 @@
-
 #ifndef ONP_H
 #define ONP_H
 
@@ -24,4 +23,4 @@ onp_diff_t *onp_alloc_diff (onp_sequence_t *a, onp_sequence_t *b);
 void onp_free_diff (onp_diff_t *diff);
 void onp_compose (onp_diff_t *diff);
 
-#endif
+#endif // ONP_H
