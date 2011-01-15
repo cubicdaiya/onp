@@ -11,11 +11,9 @@ class Onp
     @b = b
     @m = a.length
     @n = b.length
-    @reverse = false
     if @m > @n
       @a, @b = @b, @a
       @m, @n = @n, @m
-      @reverse = true
     end
     @editdis = 0
   end
