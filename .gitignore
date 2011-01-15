@@ -2,4 +2,9 @@
 a.out
 8.out
 *.8
+*.o
 .sconsign.dblite
+GPATH
+GRTAGS
+GSYMS
+GTAGS
