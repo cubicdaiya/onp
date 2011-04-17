@@ -31,7 +31,8 @@ Diff.prototype.editdistance = function () {
             fp[k+offset] = this.snake(k, fp[k-1+offset]+1, fp[k+1+offset]);
         }
         fp[delta+offset] = this.snake(delta, fp[delta-1+offset]+1, fp[delta+1+offset]);
-    } while (fp[delta+offset] != this.n);    return delta + 2 * p
+    } while (fp[delta+offset] != this.n);
+    return delta + 2 * p;
 }
     
 Diff.prototype.snake = function (k, p, pp) {
