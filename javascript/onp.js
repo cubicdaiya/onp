@@ -52,7 +52,7 @@ Diff.prototype.compose = function ()
     }
     p = -1;
     do {
-		++p;
+        ++p;
         for (var k=-p;k<=delta-1;++k) {
             fp[k+this.offset] = this.snake(k, fp[k-1+this.offset]+1, fp[k+1+this.offset]);
         }
