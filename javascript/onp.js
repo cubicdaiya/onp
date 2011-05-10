@@ -9,9 +9,9 @@ function Diff(a, b)
     this.n = b.length;
     this.reverse  = false;
     if (this.m >= this.n) {
-        var tmp = this.a;
-        this.a       = b;
-        this.b       = tmp;
+        var tmp = a;
+        this.a  = b;
+        this.b  = tmp;
         this.reverse = true;
     } else {
         this.a = a;
