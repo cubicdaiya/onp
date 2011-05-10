@@ -26,7 +26,7 @@ function Diff(a, b)
     this.SES_DELETE = -1;
     this.SES_COMMON = 0;
     this.SES_ADD    = 1;
-
+    
 }
 
 Diff.prototype.P = function (x, y, k) {
@@ -61,9 +61,9 @@ Diff.prototype.compose = function ()
         }
         fp[delta+this.offset] = this.snake(delta, fp[delta-1+this.offset]+1, fp[delta+1+this.offset]);
     } while (fp[delta+this.offset] != this.n);
-
+    
     this.ed = delta + 2 * p;
-
+    
     r = this.path[delta+this.offset];
 
     epc  = [];
@@ -76,7 +76,7 @@ Diff.prototype.compose = function ()
 
 Diff.prototype.getses = function ()
 {
-        return this.ses;
+    return this.ses;
 }
 
 Diff.prototype.recordseq = function (epc)
@@ -103,8 +103,8 @@ Diff.prototype.recordseq = function (epc)
                 ++x_idx;
                 ++px_idx;
             } else {
-				this.ses[this.ses.length] = new this.seselem(this.a[px_idx], this.SES_COMMON);
-				this.lcs += this.a[px_idx];
+		this.ses[this.ses.length] = new this.seselem(this.a[px_idx], this.SES_COMMON);
+		this.lcs += this.a[px_idx];
                 ++x_idx;
                 ++y_idx;
                 ++px_idx;
@@ -129,9 +129,9 @@ Diff.prototype.snake = function (k, p, pp)
     var r, x, y;
     if (p > pp) {
         r = this.path[k-1+this.offset];
-	} else {
+    } else {
         r = this.path[k+1+this.offset];
-	}
+    }
  
     y = Math.max(p, pp);
     x = y - k;
@@ -146,8 +146,8 @@ Diff.prototype.snake = function (k, p, pp)
 }
 
 if (arguments.lengh < 2) {
-    print("few arguments")
-    exit()
+    print("few arguments");
+    exit();
 }
 
 // main
@@ -168,4 +168,3 @@ for (var i=0;i<ses.length;++i) {
         print("+ " + ses[i].elem);
     }
 }
-
