@@ -1,9 +1,13 @@
+/** 
+ * This program is checked with node.js
+ */ 
+
 /**
  * The algorithm implemented here is based on "An O(NP) Sequence Comparison Algorithm"
  * by described by Sun Wu, Udi Manber and Gene Myers
 */
 
-function Diff(a, b)
+exports.Diff = function f(a, b)
 {
     this.m = a.length;
     this.n = b.length;
@@ -26,21 +30,20 @@ function Diff(a, b)
     this.SES_DELETE = -1;
     this.SES_COMMON = 0;
     this.SES_ADD    = 1;
-    
 }
 
-Diff.prototype.P = function (x, y, k) {
+exports.Diff.prototype.P = function (x, y, k) {
     this.x = x;
     this.y = y;
     this.k = k;
 }
 
-Diff.prototype.seselem = function (elem, t) {
+exports.Diff.prototype.seselem = function (elem, t) {
     this.elem = elem;
     this.t    = t;
 }
 
-Diff.prototype.compose = function ()
+exports.Diff.prototype.compose = function ()
 {
     var delta, size, fp, p, r, epc;
     delta  = this.n - this.m;
@@ -61,9 +64,9 @@ Diff.prototype.compose = function ()
         }
         fp[delta+this.offset] = this.snake(delta, fp[delta-1+this.offset]+1, fp[delta+1+this.offset]);
     } while (fp[delta+this.offset] != this.n);
-    
+
     this.ed = delta + 2 * p;
-    
+
     r = this.path[delta+this.offset];
 
     epc  = [];
@@ -74,12 +77,12 @@ Diff.prototype.compose = function ()
     this.recordseq(epc);
 }
 
-Diff.prototype.getses = function ()
+exports.Diff.prototype.getses = function ()
 {
     return this.ses;
 }
 
-Diff.prototype.recordseq = function (epc)
+exports.Diff.prototype.recordseq = function (epc)
 {
     var x_idx, y_idx, px_idx, py_idx;
     x_idx  = y_idx  = 1;
@@ -96,15 +99,15 @@ Diff.prototype.recordseq = function (epc)
                 ++py_idx;
             } else if (epc[i].y - epc[i].x < py_idx - px_idx) {
                 if (this.reverse) {
-    		    this.ses[this.ses.length] = new this.seselem(this.a[px_idx], this.SES_ADD);
+                    this.ses[this.ses.length] = new this.seselem(this.a[px_idx], this.SES_ADD);
                 } else {
                     this.ses[this.ses.length] = new this.seselem(this.a[px_idx], this.SES_DELETE);
                 }
                 ++x_idx;
                 ++px_idx;
             } else {
-		this.ses[this.ses.length] = new this.seselem(this.a[px_idx], this.SES_COMMON);
-		this.lcs += this.a[px_idx];
+                this.ses[this.ses.length] = new this.seselem(this.a[px_idx], this.SES_COMMON);
+                this.lcs += this.a[px_idx];
                 ++x_idx;
                 ++y_idx;
                 ++px_idx;
@@ -114,17 +117,17 @@ Diff.prototype.recordseq = function (epc)
     }
 }
 
-Diff.prototype.editdistance = function ()
+exports.Diff.prototype.editdistance = function ()
 {
     return this.ed;
 }
     
-Diff.prototype.getlcs = function ()
+exports.Diff.prototype.getlcs = function ()
 {
     return this.lcs;
 }
     
-Diff.prototype.snake = function (k, p, pp)
+exports.Diff.prototype.snake = function (k, p, pp)
 {
     var r, x, y;
     if (p > pp) {
@@ -143,28 +146,4 @@ Diff.prototype.snake = function (k, p, pp)
     this.path[k+this.offset] = this.pathposi.length;
     this.pathposi[this.pathposi.length] = new this.P(x, y, r);
     return y;
-}
-
-if (arguments.lengh < 2) {
-    print("few arguments");
-    exit();
-}
-
-// main
-
-var diff = new Diff(arguments[0], arguments[1]);
-diff.compose()
-print("editdistance:" + diff.editdistance());
-print("lcs:" + diff.getlcs());
-print("ses");
-
-var ses = diff.getses();
-for (var i=0;i<ses.length;++i) {
-    if (ses[i].t == diff.SES_COMMON) {
-        print("  " + ses[i].elem);
-    } else if (ses[i].t == diff.SES_DELETE) {
-        print("- " + ses[i].elem);
-    } else if (ses[i].t == diff.SES_ADD) {
-        print("+ " + ses[i].elem);
-    }
 }
