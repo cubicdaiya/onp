@@ -8,27 +8,30 @@
 */
 
 exports.Diff = function (a_, b_) {
-    var a          = a_;
-    var b          = b_;
-    var m          = a.length;
-    var n          = b.length;
-    var reverse    = false;
-    var ed         = null;
-    var offset     = m + 1;
-    var path       = [];
-    var pathposi   = [];
-    var ses        = [];
-    var lcs        = "";
-    var SES_DELETE = -1;
-    var SES_COMMON = 0;
-    var SES_ADD    = 1;
+    var a          = a_,
+        b          = b_,
+        m          = a.length,
+        n          = b.length,
+        reverse    = false,
+        ed         = null,
+        offset     = m + 1,
+        path       = [],
+        pathposi   = [],
+        ses        = [],
+        lcs        = "",
+        SES_DELETE = -1,
+        SES_COMMON = 0,
+        SES_ADD    = 1;
 
-    function init (a, b) {
+    function init () {
         if (m >= n) {
-            var tmp = a;
-            a       = b;
-            b       = tmp;
-            reverse = true;
+            var tmp1 = a;
+            var tmp2 = m;
+            a        = b;
+            b        = tmp1;
+            m        = n;
+            n        = tmp2;
+            reverse  = true;
         }
     }
 
@@ -101,8 +104,7 @@ exports.Diff = function (a_, b_) {
         }
     }
     
-    init(a, b);
-
+    init();
     return {
         SES_DELETE : -1,
         SES_COMMON :  0,
