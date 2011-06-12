@@ -23,6 +23,8 @@ exports.Diff = function (a_, b_) {
         SES_COMMON = 0,
         SES_ADD    = 1;
 
+    init();
+
     function init () {
         if (m >= n) {
             var tmp1 = a;
@@ -104,7 +106,6 @@ exports.Diff = function (a_, b_) {
         }
     }
     
-    init();
     return {
         SES_DELETE : -1,
         SES_COMMON :  0,
@@ -152,4 +153,3 @@ exports.Diff = function (a_, b_) {
         },
     };
 };
-    
