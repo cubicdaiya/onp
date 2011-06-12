@@ -13,10 +13,10 @@ console.log("ses");
 var ses = diff.getses();
 for (var i=0;i<ses.length;++i) {
     if (ses[i].t == diff.SES_COMMON) {
-        console.log("  " + ses[i].elem);
+        console.log(" " + ses[i].elem);
     } else if (ses[i].t == diff.SES_DELETE) {
-        console.log("- " + ses[i].elem);
+        console.log("-" + ses[i].elem);
     } else if (ses[i].t == diff.SES_ADD) {
-        console.log("+ " + ses[i].elem);
+        console.log("+" + ses[i].elem);
     }
 }
