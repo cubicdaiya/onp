@@ -23,7 +23,7 @@ exports.Diff = function (a_, b_) {
         SES_COMMON = 0,
         SES_ADD    = 1;
 
-    function init () {
+    var init = function () {
         if (m >= n) {
             var tmp1 = a;
             var tmp2 = m;
@@ -33,24 +33,24 @@ exports.Diff = function (a_, b_) {
             n        = tmp2;
             reverse  = true;
         }
-    }
+    };
 
-    function P (x, y, k) {
+    var P = function (x, y, k) {
         return {
             'x' : x,
             'y' : y,
             'k' : k,
         };
-    }
+    };
 
-    function seselem (elem, t) {
+    var seselem = function (elem, t) {
         return {
             'elem' : elem,
             't'    : t,
         };
-    }
+    };
 
-    function snake (k, p, pp) {
+    var snake = function (k, p, pp) {
         var r, x, y;
         if (p > pp) {
             r = path[k-1+offset];
@@ -68,9 +68,9 @@ exports.Diff = function (a_, b_) {
         path[k+offset] = pathposi.length;
         pathposi[pathposi.length] = new P(x, y, r);
         return y;
-    }
+    };
 
-    function recordseq (epc) {
+    var recordseq = function (epc) {
         var x_idx, y_idx, px_idx, py_idx, i;
         x_idx  = y_idx  = 1;
         px_idx = py_idx = 0;
@@ -102,8 +102,8 @@ exports.Diff = function (a_, b_) {
                 }
             }
         }
-    }
-    
+    };
+
     init();
 
     return {
