@@ -150,6 +150,6 @@ exports.Diff = function (a_, b_) {
                 r = pathposi[r].k;
             }
             recordseq(epc);
-        },
+        }
     };
 };
