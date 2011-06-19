@@ -23,15 +23,18 @@ exports.Diff = function (a_, b_) {
         SES_COMMON = 0,
         SES_ADD    = 1;
 
+    var tmp1,
+        tmp2;
+
     var init = function () {
         if (m >= n) {
-            var tmp1 = a;
-            var tmp2 = m;
-            a        = b;
-            b        = tmp1;
-            m        = n;
-            n        = tmp2;
-            reverse  = true;
+            tmp1    = a;
+            tmp2    = m;
+            a       = b;
+            b       = tmp1;
+            m       = n;
+            n       = tmp2;
+            reverse = true;
         }
     };
 
