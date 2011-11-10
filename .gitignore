@@ -1,6 +1,7 @@
 *.pyc
 a.out
 8.out
+*.6
 *.8
 *.o
 .sconsign.dblite
