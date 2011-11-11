@@ -4,7 +4,7 @@ The algorithm implemented here is based on "An O(NP) Sequence Comparison Algorit
 by described by Sun Wu, Udi Manber and Gene Myers 
 =end
 
-class Onp
+class Diff
   attr_reader :editdis
   def initialize(a, b)
     @a = a
