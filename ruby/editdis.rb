@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative 'Diff'
+require File.expand_path(File.dirname(__FILE__)) + '/Diff'
 
 a = ARGV[0]
 b = ARGV[1]
