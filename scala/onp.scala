@@ -41,7 +41,7 @@ class Diff[T](_a: Array[T], _b: Array[T]) {
   }
 
   def snake(k: Int, p: Int, pp: Int):Int = {
-    var y = Math.max(p, pp)
+    var y = scala.math.max(p, pp)
     var x = y - k
     while (x < m && y < n && a(x) == b(y)) {
       x = x + 1
