@@ -36,7 +36,7 @@ class Diff[T](_a: Array[T], _b: Array[T]) {
         fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
       }
       fp(delta + offset) = snake(delta, fp(delta - 1 + offset) + 1, fp(delta + 1 + offset))
-    } while(fp(delta + offset) != n)
+    } while(fp(delta + offset) < n)
     delta + 2 * p
   }
 
