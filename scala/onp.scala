@@ -26,14 +26,14 @@ class Diff[T](_a: Array[T], _b: Array[T]) {
     val size:        Int = m + n + 3
     val fp:   Array[Int] = new Array(size)
     var p:           Int = -1
-	fp.map{x => -1}
+    fp.map{x => -1}
     do {
       p = p + 1
       for (k <- (-p to delta - 1) ) {
-		fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
+        fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
       }
       for (k <- (delta + p to delta + 1).reverse) {
-		fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
+        fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
       }
       fp(delta + offset) = snake(delta, fp(delta - 1 + offset) + 1, fp(delta + 1 + offset))
     } while(fp(delta + offset) != n)
@@ -41,12 +41,12 @@ class Diff[T](_a: Array[T], _b: Array[T]) {
   }
 
   def snake(k: Int, p: Int, pp: Int):Int = {
-	var y = Math.max(p, pp)
-	var x = y - k
+    var y = Math.max(p, pp)
+    var x = y - k
     while (x < m && y < n && a(x) == b(y)) {
       x = x + 1
       y = y + 1
-	}
-	y
+    }
+    y
   }
 }
