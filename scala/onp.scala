@@ -29,10 +29,10 @@ class Diff[T](_a: Array[T], _b: Array[T]) {
     fp.map{x => -1}
     do {
       p = p + 1
-      for (k <- (-p to delta - 1) ) {
+      for (k <- (-p to delta) ) {
         fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
       }
-      for (k <- (delta + p to delta + 1).reverse) {
+      for (k <- (delta + p to delta).reverse) {
         fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
       }
       fp(delta + offset) = snake(delta, fp(delta - 1 + offset) + 1, fp(delta + 1 + offset))
