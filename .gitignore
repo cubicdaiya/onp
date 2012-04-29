@@ -10,3 +10,5 @@ GRTAGS
 GSYMS
 GTAGS
 c/editdistance
+scala/.ensime
+scala/target
