@@ -21,11 +21,11 @@ class Diff[T](_a: Array[T], _b: Array[T]) {
       n = t2
     }
 
-    val offset:      Int = m + 1
-    val delta:       Int = n - m
-    val size:        Int = m + n + 3
-    val fp:   Array[Int] = new Array(size)
-    var p:           Int = -1
+    val offset:    Int = m + 1
+    val delta:     Int = n - m
+    val size:      Int = m + n + 3
+    val fp: Array[Int] = new Array(size)
+    var p:         Int = -1
     fp.map{x => -1}
     do {
       p = p + 1
