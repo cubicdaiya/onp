@@ -12,3 +12,4 @@ GTAGS
 c/editdistance
 scala/.ensime
 scala/target
+go/editdistance

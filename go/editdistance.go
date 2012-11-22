@@ -6,72 +6,72 @@
 package main
 
 import (
-    "os"
-    "fmt"
+	"fmt"
+	"math"
+	"os"
 )
 
-type diff_info struct {
-    a string
-    b string
-    m int
-    n int
+type diffInfo struct {
+        a, b string
+        m, n int
 }
 
-func max (a int, b int) int {
-    if a > b {
-        return a
-    }
-    return b
+func max(x, y int) int {
+	return int(math.Max(float64(x), float64(y)))
 }
 
-func snake(k int, p int, pp int, diff *diff_info) int {
-    var y int = max(p, pp)
-    var x int = y - k
-    for x < diff.m && y < diff.n && diff.a[x] == diff.b[y] {
-        x++
-        y++
-    }
-    return y  
+func (diff diffInfo) snake(k, p, pp int) int {
+
+	y := max(p, pp)
+	x := y - k
+
+	for x < diff.m && y < diff.n && diff.a[x] == diff.b[y] {
+		x += 1
+		y += 1
+	}
+
+	return y
 }
 
-func editdis(a string, b string) int {
-    var diff diff_info
-    diff.a = a
-    diff.b = b
-    diff.m = len(a)
-    diff.n = len(b)
-    if diff.m > diff.n {
-        diff.a, diff.b = diff.b, diff.a
-        diff.m, diff.n = diff.n, diff.m
-    }
-    var offset int = diff.m + 1
-    var delta  int = diff.n - diff.m
-    var size   int = diff.m + diff.n + 3
-    var fp     []int = make([]int, size)
-    for i:=0;i<size;i++ {
-        fp[i] = -1
-    }
-    var p int = -1
-    for {
-        p++
-        for k:=-p;k<=delta-1;k++ {
-            fp[k+offset] = snake(k, fp[k-1+offset]+1, fp[k+1+offset], &diff)
-        }
-        for k:=delta+p;k>=delta+1;k-- {
-            fp[k+offset] = snake(k, fp[k-1+offset]+1, fp[k+1+offset], &diff)
-        }
-        fp[delta+offset] = snake(delta, fp[delta-1+offset]+1, fp[delta+1+offset], &diff)
-        if fp[delta+offset] >= diff.n {
-            break
-        }
-    }
-    return delta + 2 * p
+func editdis(a, b string) int {
+
+	diff := &diffInfo{a, b, len(a), len(b)}
+
+	if diff.m > diff.n {
+		diff.a, diff.b = diff.b, diff.a
+		diff.m, diff.n = diff.n, diff.m
+	}
+
+	offset := diff.m + 1
+	delta := diff.n - diff.m
+	size := diff.m + diff.n + 3
+	fp := make([]int, size)
+	for i := range fp {
+		fp[i] = -1
+	}
+
+	for p := 0; ; p++ {
+
+		for k := -p; k <= delta-1; k++ {
+			fp[k+offset] = diff.snake(k, fp[k-1+offset]+1, fp[k+1+offset])
+		}
+
+		for k := delta + p; k >= delta+1; k-- {
+			fp[k+offset] = diff.snake(k, fp[k-1+offset]+1, fp[k+1+offset])
+		}
+		fp[delta+offset] = diff.snake(delta, fp[delta-1+offset]+1, fp[delta+1+offset])
+		if fp[delta+offset] >= diff.n {
+			return delta + 2*p
+		}
+	}
+
+    return -1
 }
 
-func main(){
-    if len(os.Args) < 3 {
-        fmt.Printf("set two args\n")
-    } else {
-        fmt.Printf("editdistance:%d\n", editdis(os.Args[1], os.Args[2]))
-    }
+func main() {
+	if len(os.Args) < 3 {
+		fmt.Printf("set two args\n")
+	} else {
+		fmt.Printf("editdistance:%d\n", editdis(os.Args[1], os.Args[2]))
+	}
 }
