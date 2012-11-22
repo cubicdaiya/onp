@@ -5,6 +5,7 @@ Run
 ---------------
 
 You can run such as :
+
     $go run main.go hoge hogehoge
 
 Test
