@@ -14,23 +14,23 @@ func max(x, y int) int {
 }
 
 type Diff struct {
-        str1, str2 string
-        m, n int
+	str1, str2 string
+	m, n       int
 }
 
 func NewDiff(str1, str2 string) *Diff {
-        if len(str1) > len(str2) {
-                return &Diff{str2, str1, len(str2), len(str1)}
-        }
-        return &Diff{str1, str2, len(str1), len(str2)}
+	if len(str1) > len(str2) {
+		return &Diff{str2, str1, len(str2), len(str1)}
+	}
+	return &Diff{str1, str2, len(str1), len(str2)}
 }
 
 func (diff *Diff) Str1() string {
-        return diff.str1
+	return diff.str1
 }
 
 func (diff *Diff) Str2() string {
-        return diff.str2
+	return diff.str2
 }
 
 func (diff *Diff) snake(k, p, pp int) int {
@@ -60,25 +60,25 @@ func (diff *Diff) EditDistance() int {
 
 	for p := 0; ; p++ {
 
-            done := make(chan bool)
-            go func() {
-		        for k := -p; k <= delta-1; k++ {
-			        fp[k+offset] = diff.snake(k, fp[k-1+offset]+1, fp[k+1+offset])
-		        }
+		done := make(chan bool)
+		go func() {
+			for k := -p; k <= delta-1; k++ {
+				fp[k+offset] = diff.snake(k, fp[k-1+offset]+1, fp[k+1+offset])
+			}
 
-                done <- true
-            }()
+			done <- true
+		}()
 
-            go func() {
-		for k := delta + p; k >= delta+1; k-- {
-			fp[k+offset] = diff.snake(k, fp[k-1+offset]+1, fp[k+1+offset])
+		go func() {
+			for k := delta + p; k >= delta+1; k-- {
+				fp[k+offset] = diff.snake(k, fp[k-1+offset]+1, fp[k+1+offset])
+			}
+			done <- true
+		}()
+
+		for i := 0; i < 2; i++ {
+			<-done
 		}
-        done <- true
-}()
-
-        for i:=0; i<2; i++ {
-                <-done
-        }
 		fp[delta+offset] = diff.snake(delta, fp[delta-1+offset]+1, fp[delta+1+offset])
 
 		if fp[delta+offset] >= diff.n {
@@ -86,5 +86,5 @@ func (diff *Diff) EditDistance() int {
 		}
 	}
 
-    return NOT_SOLVED
+	return NOT_SOLVED
 }
