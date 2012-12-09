@@ -4,6 +4,8 @@
 
 package onp
 
+import scala.actors.Actor.actor
+
 class Diff[T](_a: Array[T], _b: Array[T]) {
 
   private var a = _a
@@ -29,12 +31,18 @@ class Diff[T](_a: Array[T], _b: Array[T]) {
     fp.map{x => -1}
     do {
       p = p + 1
-      for (k <- (-p to delta) ) {
-        fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
+      val a1 = actor {
+	for (k <- (-p to delta) ) {
+          fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
+	}
       }
-      for (k <- (delta + p to delta).reverse) {
-        fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
+      val a2 = actor {
+	for (k <- (delta + p to delta).reverse) {
+          fp(k + offset) = snake(k, fp(k - 1 + offset) + 1, fp(k + 1 + offset))
+	}
       }
+      val r1 = a1 !! 1
+      val r2 = a2 !! 1
       fp(delta + offset) = snake(delta, fp(delta - 1 + offset) + 1, fp(delta + 1 + offset))
     } while(fp(delta + offset) < n)
     delta + 2 * p
