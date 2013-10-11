@@ -43,9 +43,9 @@ const NOT_SOLVED = -1
 func (diff *Diff) EditDistance() int {
 
 	offset := diff.m + 1
-	delta  := diff.n - diff.m
-	size   := diff.m + diff.n + 3
-	fp     := make([]int, size)
+	delta := diff.n - diff.m
+	size := diff.m + diff.n + 3
+	fp := make([]int, size)
 
 	for i := range fp {
 		fp[i] = -1
