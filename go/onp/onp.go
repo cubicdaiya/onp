@@ -25,14 +25,6 @@ func NewDiff(str1, str2 string) *Diff {
 	return &Diff{str1, str2, len(str1), len(str2)}
 }
 
-func (diff *Diff) Str1() string {
-	return diff.str1
-}
-
-func (diff *Diff) Str2() string {
-	return diff.str2
-}
-
 func (diff *Diff) snake(k, p, pp int) int {
 
 	y := max(p, pp)
