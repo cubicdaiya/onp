@@ -91,5 +91,5 @@ fn main() {
 
     let d = build_diff(a.to_string(), b.to_string());
 
-    println!("ed: {}", d.ed());
+    println!("editdistance: {}", d.ed());
 }
