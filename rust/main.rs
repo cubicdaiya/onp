@@ -49,11 +49,7 @@ impl Diff {
             let mut k = offset - p;
             while k <= delta + offset - 1 {
                 let y = max(fp[k - 1] + 1, fp[k + 1]);
-                if offset < k {
-                    fp[k] = self.snake(y - (k - offset), y);
-                } else {
-                    fp[k] = self.snake(y + (offset - k), y);
-                }
+                fp[k] = self.snake(y + offset - k, y);
                 k = k + 1;
             }
             let mut l = delta + p;
