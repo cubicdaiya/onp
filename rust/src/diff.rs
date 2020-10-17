@@ -1,14 +1,13 @@
 use std::cmp::max;
-use std::env::args;
 
-struct Diff {
+pub struct Diff {
     a: String,
     b: String,
     m: usize,
     n: usize,
 }
 
-fn build_diff(mut a: String, mut b: String) -> Diff {
+pub fn build_diff(mut a: String, mut b: String) -> Diff {
     if a.len() > b.len() {
         let t = a;
         a = b;
@@ -35,7 +34,7 @@ impl Diff {
         return y;
     }
 
-    fn ed(&self) -> usize {
+    pub fn ed(&self) -> usize {
         let offset: usize = self.m + 1;
         let delta: usize = self.n - self.m;
         let size = self.m + self.n + 3;
@@ -66,23 +65,4 @@ impl Diff {
         }
         return delta + 2 * p;
     }
-}
-
-fn main() {
-    let args: Vec<String> = args().collect();
-
-    if args.len() < 3 {
-        println!("few arguments");
-        std::process::exit(1);
-    }
-
-    let a = &args[1];
-    let b = &args[2];
-
-    println!("{}", a);
-    println!("{}", b);
-
-    let d = build_diff(a.to_string(), b.to_string());
-
-    println!("editdistance: {}", d.ed());
 }
