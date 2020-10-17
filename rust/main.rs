@@ -8,14 +8,11 @@ struct Diff {
     n: usize,
 }
 
-fn build_diff(a: String, b: String) -> Diff {
+fn build_diff(mut a: String, mut b: String) -> Diff {
     if a.len() > b.len() {
-        return Diff {
-            a: b.to_string(),
-            b: a.to_string(),
-            m: b.len(),
-            n: a.len(),
-        };
+        let t = a;
+        a = b;
+        b = t;
     }
     return Diff {
         a: a.to_string(),
