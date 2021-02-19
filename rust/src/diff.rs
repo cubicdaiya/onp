@@ -8,7 +8,7 @@ pub struct Diff {
 }
 
 pub fn build_diff(mut a: String, mut b: String) -> Diff {
-    if a.len() > b.len() {
+    if a.chars().count() > b.chars().count() {
         let t = a;
         a = b;
         b = t;
@@ -16,8 +16,8 @@ pub fn build_diff(mut a: String, mut b: String) -> Diff {
     return Diff {
         a: a.to_string(),
         b: b.to_string(),
-        m: a.len(),
-        n: b.len(),
+        m: a.chars().count(),
+        n: b.chars().count(),
     };
 }
 
