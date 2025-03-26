@@ -20,7 +20,7 @@ class Diff
   def compose()
     offset = @m + 1
     delta  = @n - @m
-    size   = @m + @m + 3
+    size   = @m + @n + 3
     fp     = Array.new(size){|i| -1}
     p      = -1
     begin
